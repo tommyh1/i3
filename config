@@ -1,33 +1,18 @@
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# i3 config file
 
+# mod key = windows key
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
 font pango:AgaveNerdFont 8
-
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:DejaVu Sans Mono 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --aus
 exec autostart --environment i3
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --image ~/Pictures/bg2.png --noforkexec google-chrome-stable --app='https://web.whatsapp.com/'
-
 # i3lock
 bindsym $mod+x exec --no-startup-id i3lock --image ~/Pictures/bg2.png
-
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -56,22 +41,14 @@ bindsym $mod+Shift+q kill
 # start rofi program launcher
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 
-# start dmenu (a program launcher)
-# bindsym $mod+d exec --no-startup-id dmenu_run
-# A more modern dmenu replacement is rofi:
-# bindcode $mod+40 exec "rofi -modi drun,run -show drun"
-# There also is i3-dmenu-desktop which only displays applications shipping a
-# .desktop file. It is a wrapper around dmenu, so you need that installed.
-# bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
+# start dmenu program launcher
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run
 
-# change focus
-#  bindsym $mod+j focus left
-#  bindsym $mod+k focus down
-#  bindsym $mod+l focus up
-#  bindsym $mod+eacute focus right
-
-# Logout
-#bindsym $mod+Shift+x i3-msg exit
+# change focus vim keys
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+eacute  focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -100,8 +77,6 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -113,11 +88,7 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
-# bindsym mod+d focus child
-
 # Define names for default workspaces for which we configure key bindings later on.
-# We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:  "
 set $ws2 "2: 󰊯 "
 set $ws3 "3:  "
@@ -128,6 +99,7 @@ set $ws7 "7:  "
 set $ws8 "8:  "
 set $ws9 "9: 󰏆 "
 set $ws10 "10:  "
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -139,6 +111,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -174,6 +147,7 @@ set $ws17 "17:  "
 set $ws18 "18:  "
 set $ws19 "19: 󰏆 "
 set $ws110 "20:  "
+
 # switch to workspace on second monitor
 bindsym $mod+F1 workspace number $ws11
 bindsym $mod+F2 workspace number $ws12
@@ -185,6 +159,7 @@ bindsym $mod+F7 workspace number $ws17
 bindsym $mod+F8 workspace number $ws18
 bindsym $mod+F9 workspace number $ws19
 bindsym $mod+F10 workspace number $ws110
+
 # move focused container to workspace on second monitor
 bindsym $mod+Shift+F1 move container to workspace number $ws11
 bindsym $mod+Shift+F2 move container to workspace number $ws12
@@ -196,6 +171,7 @@ bindsym $mod+Shift+F7 move container to workspace number $ws17
 bindsym $mod+Shift+F8 move container to workspace number $ws18
 bindsym $mod+Shift+F9 move container to workspace number $ws19
 bindsym $mod+Shift+F10 move container to workspace number $ws110
+
 # workspaces to specific output (HDMI-1-0)
 workspace $ws11 output HDMI-1-0
 workspace $ws12 output HDMI-1-0
@@ -212,8 +188,6 @@ workspace $ws110 output HDMI-1-0
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-# scratchpad
-
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
@@ -227,11 +201,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-# Original
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Out!? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-#bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -m 'Do you really want to exit i3? (y to confirm)' -B 'Yes' 'i3-msg exit'
-
 bindsym $mod+Shift+e exec i3-nagbar -f "pango:AgaveNerdFont 11" \
 -m "󰚌 i3 ?" \
 -B "Exit now" "i3-msg exit" \
@@ -241,36 +210,31 @@ bindsym $mod+Shift+e exec i3-nagbar -f "pango:AgaveNerdFont 11" \
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+        
+# These bindings trigger as soon as you enter the resize mode
+bindsym j resize shrink width 10 px or 10 ppt
+bindsym k resize grow height 10 px or 10 ppt
+bindsym l resize shrink height 10 px or 10 ppt
+bindsym eacute resize grow width 10 px or 10 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym eacute resize grow width 10 px or 10 ppt
+# same bindings, but for the arrow keys
+bindsym Left resize shrink width 10 px or 10 ppt
+bindsym Down resize grow height 10 px or 10 ppt
+bindsym Up resize shrink height 10 px or 10 ppt
+bindsym Right resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+# back to normal: Enter or Escape or $mod+r
+bindsym Return mode "default"
+bindsym Escape mode "default"
+bindsym $mod+r mode "default"
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # bumblebee-status
-# /usr/share/bumblebee-status/bumblebee-status
-
 bar {
-    id primary_bar 
+    id primary_bar # top bar
     workspace_buttons yes
     font pango:AgaveNerdFont 12
     mode invisible #hide
@@ -290,9 +254,8 @@ bar {
         urgent_workspace #000000 #000000 #ff2d00 
     }
 }
-
 bar {
-    id second_bar
+    id second_bar # bottom bar
     workspace_buttons no 
     font pango:AgaveNerdFont 12
     mode invisible #hide
@@ -313,9 +276,8 @@ bar {
     }
 }
 
-# Keybinding to hide the second bar
+# Keybinding to toggle the bar
  bindsym $mod+Shift+b exec "i3-msg 'bar mode toggle'"
- #bindsym $mod+Shift+h exec "i3-msg 'bar mode id primary_bar toggle'"
 
 # gaps
 gaps inner 5
@@ -340,47 +302,6 @@ bindsym $mod+Shift+n gaps inner all set 0; gaps outer all set 0
 # Hide edge borders only if there is one window with no gaps
 hide_edge_borders smart_no_gaps
 
-# What follows here is optional and defines a mode that allows you to resize the gaps on the fly.
-# Press $mod1+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. 
-# Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace).
-# If you also press Shift with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod1+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
 # screenshot
 bindsym Print exec gnome-screenshot --interactive --file '~/Pictures/Screenshots'
 bindsym Shift+Print exec gnome-screenshot --file '~/Pictures/Screenshots' 
@@ -404,14 +325,13 @@ bindsym $mod+Control+v workspace $ws9; exec 'code'
 
 # windows starting in floating mode and centered
 # check window class/title: xprop | grep WM_CLASS
-
 for_window [floating] move position center
 
 # for_window [title="chatgpt.com"] floating enable
 for_window [class="1Password"] floating enable
 for_window [title="File Transfer*"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-# for_window [class="Spotify"] floating enable
+for_window [class="Spotify"] floating enable
 for_window [class="Lxappearance"] floating enable 
 for_window [class="gnome-system-monitor"] floating enable 
 for_window [class="Nitrogen"] floating enable
@@ -419,18 +339,15 @@ for_window [class="Gnome-multi-writer"] floating enable
 for_window [class="etcher"] floating enable 
 for_window [class="calculator"] floating enable 
 for_window [class="Org.gnome.Weather.Application"] floating enable
-# for_window [title="virtualbox"] floating enable 
+for_window [title="virtualbox"] floating enable 
 # for_window [title="win11pro"] floating enable resize set 1920 1080 
 for_window [class="Gimp"] floating enable
-
 for_window [class="Arandr"] floating enable
 for_window [class="Xarchiver"] floating enable
 for_window [class="Rhythmbox"] floating enable 
-
 for_window [class="libreoffice*"] floating disable
 for_window [class="libreoffice*"] move to workspace $ws9
 for_window [class="libreoffice*"] fullscreen disable
-
 for_window [class="Nm-connection-editor"] floating enable 
 for_window [class="Blueman-manager"] floating enable 
 for_window [title="Disks"] floating enable
@@ -446,10 +363,6 @@ for_window [class="gnome-calculator"] floating enable
 
 # run ssh agent
 exec --no-startup-id eval $(ssh-agent -s)
-
-# picom
-# always exec --no-startup-id picom -i 0.7 --focus-exclude 'class_g = "Rofi" || class_g = "mpv" || class_g = "gl"'
-# exec --no-startup-id picom -i 0.7
 
 # set background
 exec --no-startup-id nitrogen --set-scaled ~/Pictures/bg2.jpg
